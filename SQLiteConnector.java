@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 public class SQLiteConnector {
     // JDBC URL, username, and password of SQLite server
-    private static final String JDBC_URL = "jdbc:sqlite:/test.db";
+    private static final String JDBC_URL = "jdbc:sqlite:/Users/zarmina/Desktop/1951/1951CoffeeCollective/test.db";
     // Note: In SQLite, there is no username or password like in other databases
 
     // JDBC variables for opening, closing, and managing the database connection
