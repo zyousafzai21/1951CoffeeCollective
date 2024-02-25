@@ -26,6 +26,24 @@
             cursor: pointer;
         }
 
+        #subscriptionbutton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #subscriptionbutton:hover {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
         #addToCartBtn:hover {
             background-color: #45a049;
         }
@@ -34,28 +52,52 @@
             font-size: 16px;
             margin-top: 10px;
         }
+
+        #productDescription {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
-<h1>Welcome to Our Online Store</h1>
+<h1>Cloud King Espresso</h1>
 
 <!-- Product Image -->
-<img id="productImage" src="your_product_image.jpg" alt="Product Image">
+<img id="productImage" src="images/cloudking.jpeg" alt="Product Image" style="width: 400px; height: 500px;">
+
+<!-- Product Description -->
+<p id="productDescription">Named after our first café manager and major contributor to the design of the Barista Training Program, Meg Raj, whose name in Nepali means Cloud King.
+    <br>
+    Whole Bean
+    <br>
+    Roast: Medium <br>
+    Origin: Latin American and Eastern African Blend. <br>
+    Tasting Notes: Bittersweet Chocolate, Candied Orange, Praline.</p>
+
+<div class="quantity-container">
+    <label for="quantity" class="quantity-label">Quantity:</label>
+    <input type="text" id="quantity" name="quantity" class="quantity-input" value="1" maxlength="3">
+</div> <br>
 
 <!-- Checkbox -->
-<div>
-    <input type="checkbox" id="addToWishlistCheckbox">
-    <label for="addToWishlistCheckbox" id="checkboxLabel">Add to Wishlist</label>
-</div>
+<br>
+<button id="subscriptionbutton" onclick="navigateToPurchase('StartSubscriptionPage.html', 'Cloud King Espresso')">I'd like to create subscription</button>
+<br>
 
 <!-- Add to Cart Button -->
-<button id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
+<br>
+<button id="addToCartBtn" onclick="addToCart()">One-Time Purchase Please</button>
 
 <script>
     function addToCart() {
         // Add your logic here for adding the product to the cart
         alert('Product added to the cart!');
+    }
+
+    function navigateToPurchase(page, coffeeChoice) {
+        // Pass the coffeeChoice as a parameter in the URL
+        window.location.href = page + '?coffeeChoice=' + encodeURIComponent(coffeeChoice);
     }
 </script>
 

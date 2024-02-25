@@ -2,9 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #productImage {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #addToCartBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #addToCartBtn:hover {
+            background-color: #45a049;
+        }
+
+        #subscriptionbutton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #subscriptionbutton:hover {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #checkboxLabel {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #productDescription {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
+
+<h1>Ethiopia Mother Station Washed</h1>
+
+<!-- Product Image -->
+<img id="productImage" src="images/ethiopiamother.jpeg" alt="Product Image" style="width: 400px; height: 500px;">
+
+<!-- Product Description -->
+<p id="productDescription">Whole Bean Coffee <br>
+
+    Roast: Medium<br>
+    Origin: 100% Ethiopian, washed.<br>
+    Tasting Notes: Lime, Orange Blossom Honey, Vanilla</p>
+
+<div class="quantity-container">
+    <label for="quantity" class="quantity-label">Quantity:</label>
+    <input type="text" id="quantity" name="quantity" class="quantity-input" value="1" maxlength="3">
+</div> <br>
+
+<!-- Checkbox -->
+<br>
+<button id="subscriptionbutton" onclick="navigateToPurchase('StartSubscriptionPage.html', 'Ethiopia Mother Station Washed')">I'd like to create subscription</button>
+<br>
+<!-- Add to Cart Button -->
+<br>
+<button id="addToCartBtn" onclick="addToCart()">One-Time Purchase Please</button>
+
+<script>
+    function addToCart() {
+        // Add your logic here for adding the product to the cart
+        alert('Product added to the cart!');
+    }
+
+    function navigateToPurchase(page, coffeeChoice) {
+        // Pass the coffeeChoice as a parameter in the URL
+        window.location.href = page + '?coffeeChoice=' + encodeURIComponent(coffeeChoice);
+    }
+</script>
 
 </body>
 </html>
