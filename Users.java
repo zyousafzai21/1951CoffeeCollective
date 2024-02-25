@@ -98,4 +98,6 @@ public class User {
     public void setSubscriptionDuration(SubscriptionDuration subscriptionDuration) {
         this.subscriptionDuration = subscriptionDuration;
     }
+
+
 }
