@@ -1,9 +1,7 @@
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class UserDao {
+public class UserDAO {
 
     // Method to insert a new user into the database
     public static void addUser(User user) {
