@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        #productImage {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        #addToCartBtn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #addToCartBtn:hover {
+            background-color: #45a049;
+        }
+
+        #checkboxLabel {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+
+<h1>Welcome to Our Online Store</h1>
+
+<!-- Product Image -->
+<img id="productImage" src="your_product_image.jpg" alt="Product Image">
+
+<!-- Checkbox -->
+<div>
+    <input type="checkbox" id="addToWishlistCheckbox">
+    <label for="addToWishlistCheckbox" id="checkboxLabel">Add to Wishlist</label>
+</div>
+
+<!-- Add to Cart Button -->
+<button id="addToCartBtn" onclick="addToCart()">Add to Cart</button>
+
+<script>
+    function addToCart() {
+        // Add your logic here for adding the product to the cart
+        alert('Product added to the cart!');
+    }
+</script>
 
 </body>
 </html>
