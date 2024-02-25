@@ -1,0 +1,99 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Table</title>
+<style>
+	.tableWithEdits{
+		display: flex;
+	}
+    table {
+        width: 100%;
+        border-collapse: collapse;
+		display: flex;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    .add-button {
+        margin-bottom: 10px;
+    }
+
+	.edit-button {
+        display: flex;
+        padding: 5px 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        color: #333;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h2>Current Subscriptions</h2>
+
+<button class="add-button" onclick="addRow()">Add Row</button>
+<div class = "tableWithEdits">
+	<table id="coffee-table">
+		<tr>
+			<th>Coffee</th>
+			<th>Frequency</th>
+			<th>Duration</th>
+			<th>Status</th>
+		</tr>
+	</table>
+	<button id="edit-button"> Edit</button>
+</div>
+
+<p> Click here for more subscriptions and coffee: <a href="https://www.1951coffee.com/shop"> purchases</a></p>
+
+<script>
+    function fetchDataFromDatabase() {
+        // Example data from the database
+        return [
+            { coffee: "Espresso", frequency: "Daily", duration: "10 minutes", status: "Active" },
+            { coffee: "Latte", frequency: "Weekly", duration: "20 minutes", status: "Inactive" }
+            // Add more entries as needed
+        ];
+    }
+
+    function populateTable() {
+        let table = document.getElementById("coffee-table");
+        let data = fetchDataFromDatabase();
+
+        data.forEach(entry => {
+            let newRow = table.insertRow(-1);
+            let coffeeCell = newRow.insertCell(0);
+            let frequencyCell = newRow.insertCell(1);
+            let durationCell = newRow.insertCell(2);
+            let statusCell = newRow.insertCell(3);
+
+            coffeeCell.innerText = entry.coffee;
+            frequencyCell.innerText = entry.frequency;
+            durationCell.innerText = entry.duration;
+            statusCell.innerText = entry.status;
+        });
+    }
+
+    populateTable();
+</script>
+
+</body>
+
+</html>
+
+
+
