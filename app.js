@@ -1,10 +1,29 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test.db'); // Connects to the existing test.db database file
+const express = require('express')
+const app = express()
+const port = 3000
 
-// Function to insert a new user
-function insertUser(id, username, email, password) {
-    const stmt = db.prepare('INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)');
-    stmt.run(id, username, email, password);
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+  // Example usage:
+  getAllUserData((error, userList) => {
+     if (error) {
+         console.error('Error:', error);
+     } else {
+        console.log(userList);
+     }
+  });
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+
+// Function to add a user
+function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration) {
+    const stmt = db.prepare('INSERT INTO users (userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    stmt.run(userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration);
     stmt.finalize();
 }
 
@@ -14,7 +33,7 @@ function getAllUserData(callback) {
     const userList = [];
 
     db.each(sql_statement, (err, row) => {
-//        console.log(row);
+        console.log("Getting row: " + row);
         userList.push(row);
     }, (err, rowCount) => {
         // Callback after all rows have been processed
@@ -32,30 +51,6 @@ function getAllUserData(callback) {
     });
 }
 
-// Example usage:
-getAllUserData((error, userList) => {
-    if (error) {
-        console.error('Error:', error);
-    } else {
-        console.log('User List:', userList);
-    }
-
-    // Close the database connection (if needed)
-    db.close();
-});
-
-//function getAllUserData() {
-//    const sql_statement = 'SELECT userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM users'
-//    const userList = [];
-//
-//    db.each(sql_statement, (err, row) => {
-//        console.log(row);
-//        userList.push(row);
-//    });
-//
-//    return userList;
-//}
-
 // Function to display all users
 function displayAllUsers() {
     const sql_statement = 'SELECT userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM users'
@@ -65,7 +60,6 @@ function displayAllUsers() {
     });
 }
 
-//console.log(getAllUserData());
 //// Create a users table
 //db.serialize(() => {
 ////    db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT)');
