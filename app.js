@@ -26,6 +26,7 @@ function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coff
     stmt.finalize();
 }
 
+// Callback function to get subscription data by UserID
 function getSubDataByUID(userId, callback) {
     const sql_statement = 'SELECT subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM WHERE userID = ${userId}';
     const subData = [];
@@ -73,28 +74,13 @@ function getAllUserData(callback) {
     });
 }
 
-// Function to display all users
+// Function to display all users and their data
 function displayAllUsers() {
     const sql_statement = 'SELECT userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM users'
 
     db.each(sql_statement, (err, row) => {
         console.log(`User ID: ${row.userID}, Name: ${row.name}, Email: ${row.email}, Phone No: ${row.phoneNo}, Address: ${row.address}, Subscription Status: ${row.subscriptionStatus}, Coffee Choice: ${row.coffeeChoice}, Subscription Frequency: ${row.subscriptionFrequency}, Subscription Duration: ${row.subscriptionDuration}`);
     });
+
+    db.close();
 }
-
-//// Create a users table
-//db.serialize(() => {
-////    db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT)');
-//
-//    // Insert a new user
-//    const stmt = db.prepare('INSERT INTO users (id, username, email, password) VALUES (?, ?, ?, ?)');
-//    stmt.run(19511951, 'zyou', 'zyou@gmail.com', 'secret');
-//    stmt.finalize();
-//
-//    // Retrieve and display users
-//    db.each('SELECT id, username, email, password FROM users', (err, row) => {
-//        console.log(`User ID: ${row.id}, Username: ${row.username}, Email: ${row.email}, Password: ${row.password}`);
-//    });
-//});
-
-// Close the database connection
