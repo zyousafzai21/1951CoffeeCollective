@@ -26,13 +26,36 @@ function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coff
     stmt.finalize();
 }
 
+function getSubDataByUID(userId, callback) {
+    const sql_statement = 'SELECT subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM WHERE userID = ${userId}';
+    const subData = [];
+
+    db.each(sql_statement, [userId], (err, row) => {
+        console.log("Getting subData: " + row);
+        subData.push(row);
+    }, (err, rowCount) => {
+        // Callback after all rows have been processed
+        if (err) {
+            console.error(err);
+            callback(err, null);
+            return;
+        }
+
+        // Close the database connection
+        db.close();
+
+        // Call the callback with the list of rows
+        callback(null, userList);
+    });
+}
+
 // Callback function to get all user data
 function getAllUserData(callback) {
     const sql_statement = 'SELECT userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM users';
     const userList = [];
 
     db.each(sql_statement, (err, row) => {
-        console.log("Getting row: " + row);
+        console.log("Getting userData: " + row);
         userList.push(row);
     }, (err, rowCount) => {
         // Callback after all rows have been processed
