@@ -5,16 +5,15 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
-  // Example usage:
   getAllUserData((error, userList) => {
      if (error) {
          console.error('Error:', error);
-     } else {
-        console.log(userList);
+         res.status(500).send('Internal Server Error');
+         return;
      }
+     res.json(userList);
   });
-})
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -1,34 +1,37 @@
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coffee Table</title>
-<style>
-	.tableWithEdits{
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/fonts/squarespace-clarkson-v2.css">
+	<title>Coffee Table</title>
+	<style>
+	/* .tableWithEdits{
 		display: flex;
-	}
+	} */
     table {
-        width: 100%;
+        width: fit-content;
         border-collapse: collapse;
 		display: flex;
     }
 
-    table, th, td {
-        border: 1px solid black;
-    }
-
     th, td {
+		border: 1px solid black;
         padding: 8px;
         text-align: left;
     }
 
-    th {
-        background-color: #f2f2f2;
-    }
+	.textS{
+		font-family: ;
+		/* Clarkson,Proxima Nova,Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif */
+	}
 
-    .add-button {
-        margin-bottom: 10px;
-    }
+	th:not(:last-child) {
+    background-color: #f2f2f2;
+	}
+
+	tr td:last-child, tr th:last-child {
+        border : none;
+	}
 
 	.edit-button {
         display: flex;
@@ -43,24 +46,40 @@
 </head>
 <body>
 
-<h2>Current Subscriptions</h2>
+<h2><div class= "textS">Current Subscriptions</div></h2>
 
-<button class="add-button" onclick="addRow()">Add Row</button>
 <div class = "tableWithEdits">
 	<table id="coffee-table">
 		<tr>
-			<th>Coffee</th>
-			<th>Frequency</th>
-			<th>Duration</th>
-			<th>Status</th>
+			<th><div class= "textS">Coffee</div></th>
+			<th><div class= "textS">Frequency</div></th>
+			<th><div class= "textS">Duration</div></th>
+			<th><div class= "textS">Status</div></th>
+			<th></th>
 		</tr>
 	</table>
-	<button id="edit-button"> Edit</button>
+
+
 </div>
 
-<p> Click here for more subscriptions and coffee: <a href="https://www.1951coffee.com/shop"> purchases</a></p>
 
-<script>
+<p> <div class = "textS"> Click here for more subscriptions and coffee: <a href="https://www.1951coffee.com/shop"> purchases</a> </div> </p>
+
+<script src = 'app.js'>
+
+	const userList = <%=JSON.stringify(userList) %>>;
+
+<!--	getAllUserData((error, userList) => {-->
+<!--    if (error) {-->
+<!--        console.error('Error:', error);-->
+<!--    } else {-->
+<!--        console.log('User List:', userList);-->
+<!--    }-->
+
+<!--    // Close the database connection (if needed)-->
+<!--    db.close();-->
+<!--});-->
+
     function fetchDataFromDatabase() {
         // Example data from the database
         return [
@@ -69,6 +88,80 @@
             // Add more entries as needed
         ];
     }
+<!--    -->
+<!--    function fetchDataFromDatabase() {-->
+<!--        // Example data from the database-->
+<!--        return <%=JSON.stringify(userList) %>>;-->
+<!--    }-->
+
+	// change
+	function editRow(button) {
+        let row = button.parentNode.parentNode;
+        let cells = row.getElementsByTagName("td");
+        for (let i = 0; i < cells.length - 1; i++) {
+            let cellText = cells[i].innerText;
+            let dropdown = document.createElement("select");
+			if (i == 0){
+				dropdown.innerHTML = `
+                <option value="Cloud King Espresso">Cloud King Espresso</option>
+                <option value="Durable Solution">Durable Solution</option>
+                <option value="Seasonal Single Origin: African">Seasonal Single Origin: African</option>
+				<option value="Seasonal Single Origin: Latin American"> Seasonal Single Origin: Latin American</option>
+                <option value="Decaf">Decaf</option>
+                <option value="Roasters Choice">Roasters Choice</option>
+            `;
+			}
+            if (i == 1){
+				dropdown.innerHTML = `
+				<option value="2 Weeks">2 Weeks</option>
+                <option value="4 Weeks">4 Weeks</option>
+            `;
+			}
+			if (i == 2){
+				dropdown.innerHTML = `
+				<option value="Ongoing">Ongoing</option>
+                <option value="3 months">3 months</option>
+				<option value="6 months">6 months</option>
+            `;
+			}
+			if (i == 3){
+				dropdown.innerHTML = `
+				<option value="Ongoing">Ongoing</option>
+                <option value="Paused">Paused</option>
+				<option value="Canceled">Canceled</option>
+            `;
+			}
+            dropdown.value = cellText;
+            dropdown.onchange = function() {
+                cellText = dropdown.value;
+            };
+            cells[i].innerText = "";
+            cells[i].appendChild(dropdown);
+        }
+
+        button.innerText = "Save";
+        button.onclick = function() {
+            saveRow(row);
+
+        };
+    }
+
+	// change saveRow
+    function saveRow(row) {
+        let cells = row.getElementsByTagName("td");
+        for (let i = 0; i < cells.length - 1; i++) {
+            let dropdown = cells[i].getElementsByTagName("select")[0];
+            cells[i].innerText = dropdown.value;
+        }
+
+        let button = cells[cells.length - 1].getElementsByTagName("button")[0];
+        button.innerText = "Edit";
+        button.onclick = function() {
+            editRow(button);
+        };
+    }
+
+
 
     function populateTable() {
         let table = document.getElementById("coffee-table");
@@ -80,11 +173,21 @@
             let frequencyCell = newRow.insertCell(1);
             let durationCell = newRow.insertCell(2);
             let statusCell = newRow.insertCell(3);
+            let editCell = newRow.insertCell(4);
 
             coffeeCell.innerText = entry.coffee;
             frequencyCell.innerText = entry.frequency;
             durationCell.innerText = entry.duration;
             statusCell.innerText = entry.status;
+
+            let editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.className = "edit-button";
+            editButton.onclick = function() {
+                editRow(editButton)
+            };
+
+            editCell.appendChild(editButton);
         });
     }
 
@@ -94,6 +197,5 @@
 </body>
 
 </html>
-
 
 
