@@ -5,15 +5,15 @@ public class User {
     private String email;
     private String phoneNumber;
     private String address;
-    private SubscriptionStatus subscriptionStatus;
-    private CoffeeChoice coffeeChoice;
-    private SubscriptionFrequency subscriptionFrequency;
-    private SubscriptionDuration subscriptionDuration;
+    private String subscriptionStatus;
+    private String coffeeChoice;
+    private String subscriptionFrequency;
+    private String subscriptionDuration;
 
     // Constructor
     public User(int userId, String name, String email, String phoneNumber, String address,
-                SubscriptionStatus subscriptionStatus, CoffeeChoice coffeeChoice,
-                SubscriptionFrequency subscriptionFrequency, SubscriptionDuration subscriptionDuration) {
+                String subscriptionStatus, String coffeeChoice,
+                String subscriptionFrequency, String subscriptionDuration) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -67,35 +67,35 @@ public class User {
         this.address = address;
     }
 
-    public SubscriptionStatus getSubscriptionStatus() {
+    public String getSubscriptionStatus() {
         return subscriptionStatus;
     }
 
-    public void setSubscriptionStatus(SubscriptionStatus subscriptionStatus) {
+    public void setSubscriptionStatus(String subscriptionStatus) {
         this.subscriptionStatus = subscriptionStatus;
     }
 
-    public CoffeeChoice getCoffeeChoice() {
+    public String getCoffeeChoice() {
         return coffeeChoice;
     }
 
-    public void setCoffeeChoice(CoffeeChoice coffeeChoice) {
+    public void setCoffeeChoice(String coffeeChoice) {
         this.coffeeChoice = coffeeChoice;
     }
 
-    public SubscriptionFrequency getSubscriptionFrequency() {
+    public String getSubscriptionFrequency() {
         return subscriptionFrequency;
     }
 
-    public void setSubscriptionFrequency(SubscriptionFrequency subscriptionFrequency) {
+    public void setSubscriptionFrequency(String subscriptionFrequency) {
         this.subscriptionFrequency = subscriptionFrequency;
     }
 
-    public SubscriptionDuration getSubscriptionDuration() {
+    public String getSubscriptionDuration() {
         return subscriptionDuration;
     }
 
-    public void setSubscriptionDuration(SubscriptionDuration subscriptionDuration) {
+    public void setSubscriptionDuration(String subscriptionDuration) {
         this.subscriptionDuration = subscriptionDuration;
     }
 
