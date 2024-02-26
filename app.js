@@ -3,18 +3,37 @@ const db = new sqlite3.Database('test.db'); // Connects to the existing test.db 
 const express = require('express')
 const app = express()
 const port = 3000
+const ejs = require('ejs');
+
+app.set('view engine', 'ejs'); // Set EJS as the view engine
 
 app.get('/', (req, res) => {
-  const userId = 1
+  const userId = 1;
   getSubDataByUID(userId, (error, subData) => {
-     if (error) {
-         console.error('Error:', error);
-         res.status(500).send('Internal Server Error');
-         return;
-     }
-     res.json(subData);
+    if (error) {
+      console.error('Error:', error);
+      res.status(500).send('Internal Server Error');
+      return;
+    }
+    res.render('test', { subData }); // Render index.ejs with subData
   });
 });
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+//app.get('/', (req, res) => {
+//  const userId = 1
+//  getSubDataByUID(userId, (error, subData) => {
+//     if (error) {
+//         console.error('Error:', error);
+//         res.status(500).send('Internal Server Error');
+//         return;
+//     }
+//     res.json(subData);
+//  });
+//});
 
 //app.get('/', (req, res) => {
 //  getAllUserData((error, userList) => {
@@ -35,9 +54,9 @@ app.get('/', (req, res) => {
 //     }
 //  });
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+//app.listen(port, () => {
+//  console.log(`Example app listening on port ${port}`)
+//})
 
 // Function to add a user
 function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration) {
@@ -63,7 +82,7 @@ function getSubDataByUID(userId, callback) {
             return;
         }
 
-        console.log("Getting subData: " + row.coffeeChoice);
+        console.log("Getting subData: " + row);
 
 
         // Close the database connection

@@ -1,0 +1,75 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//assets.squarespace.com/universal/fonts/squarespace-clarkson-v2.css">
+	<title>Coffee Table</title>
+	<style>
+	/* .tableWithEdits{
+		display: flex;
+	} */
+    table {
+        width: fit-content;
+        border-collapse: collapse;
+		display: flex;
+    }
+
+    th, td {
+		border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+	.textS{
+		font-family: ;
+		/* Clarkson,Proxima Nova,Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif */
+	}
+
+	th:not(:last-child) {
+    background-color: #f2f2f2;
+	}
+
+	tr td:last-child, tr th:last-child {
+        border : none;
+	}
+
+	.edit-button {
+        display: flex;
+        padding: 5px 10px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        color: #333;
+        margin-right: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h2><div class= "textS">Current Subscriptions</div></h2>
+<p>SubData: <%= JSON.stringify(subData) %></p>
+
+<div class = "tableWithEdits">
+	<table id="coffee-table">
+		<tr>
+			<th><div class= "textS">Coffee</div></th>
+			<th><div class= "textS">Frequency</div></th>
+			<th><div class= "textS">Duration</div></th>
+			<th><div class= "textS">Status</div></th>
+			<th></th>
+		</tr>
+	</table>
+
+
+</div>
+
+
+<p> <div class = "textS"> Click here for more subscriptions and coffee: <a href="https://www.1951coffee.com/shop"> purchases</a> </div> </p>
+
+<script src="../script.js"></script>
+<!-- <script src="../app.js"></script> -->
+
+
+</body>
+
+</html>
