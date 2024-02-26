@@ -92,8 +92,40 @@
 <script>
     document.getElementById('userForm').addEventListener('submit', function (event) {
         event.preventDefault();
+
+        const userIDValue = document.getElementById('userID').value
+        const nameValue = document.getElementById('name').value
+        const emailValue = document.getElementById('email').value
+        const phoneNoValue = document.getElementById('phoneNo').value
+        const addressValue = document.getElementById('address').value
+        const coffeeChoiceValue = document.getElementById('coffeeChoice').value
+        const frequencyValue = document.getElementById('frequency').value
+        const durationValue = document.getElementById('duration').value
+
+        const body ={
+            userID: userIDValue,
+            name: nameValue,
+            email: emailValue,
+            phoneNo: phoneNoValue,
+            address: addressValue,
+            coffeeChoice: coffeeChoiceValue,
+            frequency: frequencyValue,
+            duration: durationValue
+        }
+         console.log(body)
+
+        const headers = new Headers()
+        headers.set('Content-Type', 'application/json')
+
+        fetch(
+            'http://localhost:3000/submit',
+            {
+                method: "POST",
+                body: JSON.stringify(body),
+                headers: headers
+            }
+        )
         // Add your logic to handle the form submission here
-        alert('Form submitted!');
     });
 
     // Function to get URL parameters

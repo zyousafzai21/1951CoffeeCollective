@@ -1,14 +1,45 @@
 const sqlite3 = require('sqlite3').verbose();
 const db = new sqlite3.Database('test.db'); // Connects to the existing test.db database file
 const express = require('express')
+const path = require('path');  // Include the path module
 const app = express()
 const port = 3000
 const ejs = require('ejs');
-
 app.set('view engine', 'ejs'); // Set EJS as the view engine
+const staticDirectory = path.join(__dirname, 'views');
+console.log(staticDirectory);
+app.use(express.static(staticDirectory));
+const bodyParser = require('body-parser');
+const cors = require("cors");
+
+app.use(bodyParser.json());
+
+
+app.use(cors())
 
 app.get('/', (req, res) => {
-  const userId = 1;
+    res.sendFile(__dirname + '/CoffeePages/StartSubscriptionPage.html');
+});
+
+app.post('/submit', (req, res) => {
+    console.log(req.body.userID);
+    const userID = req.body.userID;
+    const name = req.body.name;
+    const email = req.body.email;
+    const phoneNo = req.body.phoneNo;
+    const address = req.body.address;
+    const coffeeChoice = req.body.coffeeChoice;
+    const frequency = req.body.frequency;
+    const duration = req.body.duration;
+
+    // Call the addUser function to add the user to the database
+    addUser(userID, name, email, phoneNo, address, 'active', coffeeChoice, frequency, duration);
+    res.send('Subscription started successfully!'); // Send a response back to the client
+
+});
+
+app.get('/subscriptions', (req, res) => {
+  const userId = 3141;
   getSubDataByUID(userId, (error, subData) => {
     if (error) {
       console.error('Error:', error);
@@ -17,6 +48,12 @@ app.get('/', (req, res) => {
     }
     res.render('test', { subData }); // Render index.ejs with subData
   });
+});
+
+// Explicitly set MIME type for script.js
+app.get('/script.js', (req, res) => {
+  res.type('application/javascript');
+  // Code to send script.js file
 });
 
 app.listen(3000, () => {
@@ -128,3 +165,5 @@ function displayAllUsers() {
 
     db.close();
 }
+
+displayAllUsers();
