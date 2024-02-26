@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 app.use(cors())
 
-app.get('/', (req, res) => {
+app.get('/create', (req, res) => {
     res.sendFile(__dirname + '/CoffeePages/StartSubscriptionPage.html');
 });
 
@@ -38,7 +38,7 @@ app.post('/submit', (req, res) => {
 
 });
 
-app.get('/subscriptions', (req, res) => {
+app.get('/manage', (req, res) => {
   const userId = 3141;
   getSubDataByUID(userId, (error, subData) => {
     if (error) {
@@ -56,44 +56,9 @@ app.get('/script.js', (req, res) => {
   // Code to send script.js file
 });
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('Server is running on port 3000');
 });
-
-//app.get('/', (req, res) => {
-//  const userId = 1
-//  getSubDataByUID(userId, (error, subData) => {
-//     if (error) {
-//         console.error('Error:', error);
-//         res.status(500).send('Internal Server Error');
-//         return;
-//     }
-//     res.json(subData);
-//  });
-//});
-
-//app.get('/', (req, res) => {
-//  getAllUserData((error, userList) => {
-//     if (error) {
-//         console.error('Error:', error);
-//         res.status(500).send('Internal Server Error');
-//         return;
-//     }
-//     res.json(userList);
-//  });
-//});
-
-//getSubDataByUID(1, (error, subData) => {
-//     if (error) {
-//         console.error('Error:', error);
-//     } else {
-//        console.log("HI");
-//     }
-//  });
-
-//app.listen(port, () => {
-//  console.log(`Example app listening on port ${port}`)
-//})
 
 // Function to add a user
 function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration) {
@@ -102,32 +67,54 @@ function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coff
     stmt.finalize();
 }
 
-// Callback function to get subscription data by UserID
+// Callback function to get management data
+//function getManagementData(callback) {
+//    const sql_statement = `SELECT coffeeChoice, subscriptionFrequency, subscriptionDuration, subscriptionStatus FROM users`;
+//
+//    db.get(sql_statement, (err, row) => {
+//        if (err) {
+//            console.error(err);
+//            callback(err, null);
+//            return;
+//        }
+//
+//        if (!row) {
+//            // User not found
+//            callback(new Error('User not found'), null);
+//            return;
+//        }
+//
+//        console.log("Getting subData: " + row);
+//
+//        // Close the database connection
+////        db.close();
+//
+//        // Call the callback with the row
+//        callback(null, row);
+//    });
+//}
+
 function getSubDataByUID(userId, callback) {
-    const sql_statement = `SELECT coffeeChoice, subscriptionFrequency, subscriptionDuration, subscriptionStatus FROM users WHERE userId = ?`;
+    const sql_statement = 'SELECT coffeeChoice, subscriptionFrequency, subscriptionDuration, subscriptionStatus FROM users';
+        const userList = [];
 
-    db.get(sql_statement, [userId], (err, row) => {
-        if (err) {
-            console.error(err);
-            callback(err, null);
-            return;
-        }
+        db.each(sql_statement, (err, row) => {
+            console.log("Getting userData: " + row);
+            userList.push(row);
+        }, (err, rowCount) => {
+            // Callback after all rows have been processed
+            if (err) {
+                console.error(err);
+                callback(err, null);
+                return;
+            }
 
-        if (!row) {
-            // User not found
-            callback(new Error('User not found'), null);
-            return;
-        }
+            // Close the database connection
+            db.close();
 
-        console.log("Getting subData: " + row);
-
-
-        // Close the database connection
-        db.close();
-
-        // Call the callback with the row
-        callback(null, row);
-    });
+            // Call the callback with the list of rows
+            callback(null, userList);
+        });
 }
 
 
@@ -163,7 +150,7 @@ function displayAllUsers() {
         console.log(`User ID: ${row.userID}, Name: ${row.name}, Email: ${row.email}, Phone No: ${row.phoneNo}, Address: ${row.address}, Subscription Status: ${row.subscriptionStatus}, Coffee Choice: ${row.coffeeChoice}, Subscription Frequency: ${row.subscriptionFrequency}, Subscription Duration: ${row.subscriptionDuration}`);
     });
 
-    db.close();
+//    db.close();
 }
 
-displayAllUsers();
+displayAllUsers()
