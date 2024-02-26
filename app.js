@@ -5,15 +5,35 @@ const app = express()
 const port = 3000
 
 app.get('/', (req, res) => {
-  getAllUserData((error, userList) => {
+  const userId = 1
+  getSubDataByUID(userId, (error, subData) => {
      if (error) {
          console.error('Error:', error);
          res.status(500).send('Internal Server Error');
          return;
      }
-     res.json(userList);
+     res.json(subData);
   });
 });
+
+//app.get('/', (req, res) => {
+//  getAllUserData((error, userList) => {
+//     if (error) {
+//         console.error('Error:', error);
+//         res.status(500).send('Internal Server Error');
+//         return;
+//     }
+//     res.json(userList);
+//  });
+//});
+
+//getSubDataByUID(1, (error, subData) => {
+//     if (error) {
+//         console.error('Error:', error);
+//     } else {
+//        console.log("HI");
+//     }
+//  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -28,27 +48,32 @@ function addUser(userID, name, email, phoneNo, address, subscriptionStatus, coff
 
 // Callback function to get subscription data by UserID
 function getSubDataByUID(userId, callback) {
-    const sql_statement = 'SELECT subscriptionStatus, coffeeChoice, subscriptionFrequency, subscriptionDuration FROM WHERE userID = ${userId}';
-    const subData = [];
+    const sql_statement = `SELECT coffeeChoice, subscriptionFrequency, subscriptionDuration, subscriptionStatus FROM users WHERE userId = ?`;
 
-    db.each(sql_statement, [userId], (err, row) => {
-        console.log("Getting subData: " + row);
-        subData.push(row);
-    }, (err, rowCount) => {
-        // Callback after all rows have been processed
+    db.get(sql_statement, [userId], (err, row) => {
         if (err) {
             console.error(err);
             callback(err, null);
             return;
         }
 
+        if (!row) {
+            // User not found
+            callback(new Error('User not found'), null);
+            return;
+        }
+
+        console.log("Getting subData: " + row.coffeeChoice);
+
+
         // Close the database connection
         db.close();
 
-        // Call the callback with the list of rows
-        callback(null, userList);
+        // Call the callback with the row
+        callback(null, row);
     });
 }
+
 
 // Callback function to get all user data
 function getAllUserData(callback) {

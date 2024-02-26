@@ -67,32 +67,19 @@
 
 <script src = 'app.js'>
 
-	const userList = <%=JSON.stringify(userList) %>>;
-
-<!--	getAllUserData((error, userList) => {-->
-<!--    if (error) {-->
-<!--        console.error('Error:', error);-->
-<!--    } else {-->
-<!--        console.log('User List:', userList);-->
-<!--    }-->
-
-<!--    // Close the database connection (if needed)-->
-<!--    db.close();-->
-<!--});-->
-
-    function fetchDataFromDatabase() {
-        // Example data from the database
-        return [
-            { coffee: "Espresso", frequency: "Daily", duration: "10 minutes", status: "Active" },
-            { coffee: "Latte", frequency: "Weekly", duration: "20 minutes", status: "Inactive" }
-            // Add more entries as needed
-        ];
-    }
-<!--    -->
 <!--    function fetchDataFromDatabase() {-->
 <!--        // Example data from the database-->
-<!--        return <%=JSON.stringify(userList) %>>;-->
+<!--        return [-->
+<!--            { coffee: "Espresso", frequency: "Daily", duration: "10 minutes", status: "Active" },-->
+<!--            { coffee: "Latte", frequency: "Weekly", duration: "20 minutes", status: "Inactive" }-->
+<!--            // Add more entries as needed-->
+<!--        ];-->
 <!--    }-->
+<!--    -->
+    function fetchDataFromDatabase() {
+        // Example data from the database
+        return <%=JSON.stringify(subData) %>;
+    }
 
 	// change
 	function editRow(button) {
