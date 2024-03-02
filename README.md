@@ -15,6 +15,7 @@ Utilizing Node.js, Express.j, and a SQLite Database, 1951 can now manage and vie
 <img width="657" alt="Screen Shot 2024-02-25 at 6 54 56 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/94da7ec9-7cef-447c-9d61-c1e26070bfb3">
 <img width="558" alt="Screen Shot 2024-02-25 at 6 55 02 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/bee17255-d8c0-4fa0-a05c-ffa3cbc28c89">
 <img width="1231" alt="Screen Shot 2024-02-25 at 6 55 12 PM" src="https://githu<img width="663" alt="Screen Shot 2024-02-25 at 6 55 28 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/84589750-3ec8-4910-8982-75157087fd30">
-b.com/zyousafzai21/1951CoffeeCollective/assets/101530128/214fc928-1c2d-4be6-bc57-3109561659ff">
+<img width="715" alt="Screen Shot 2024-02-25 at 7 06 21 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/e453f2de-03d8-4fc8-b1aa-cba2c5e536be">
+
 <img width="715" alt="Screen Shot 2024-02-25 at 7 06 21 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/27078b59-4100-4ddf-b050-1ea0f140d8db"><img width="516" alt="Screen Shot 2024-02-25 at 7 06 25 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/b13a4ed9-bf06-47cd-943e-b300578e5390">
 
