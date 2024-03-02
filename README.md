@@ -1,5 +1,5 @@
 # 1951CoffeeCollective
-Created by 3 Cal Student during Hack For Impact! 
+Created by Anika Hauser, Cheryl Tugade, and Zarmina Yousafzai during 2024 Hack For Impact! 
 
 Introduce the Coffee Collective, a user-managed coffee subscription service for 1951 Coffee Company located in Berkeley, CA. Through the click of a button, a customer can onboard themselves to the Collective, and receive their choice of coffee on a schedule that works for them!
 
