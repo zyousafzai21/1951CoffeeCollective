@@ -5,9 +5,10 @@ Introduce the Coffee Collective, a user-managed coffee subscription service for 
 
 Utilizing Node.js, Express.j, and a SQLite Database, 1951 can now manage and view all their subscribers in one place. Users can simply log into their account, and edit their Collective settings instantly. 
 
-
+<h1> View the Coffees available for purchase. 
+</h1>
 <img width="1444" alt="Screen Shot 2024-02-25 at 6 53 36 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/0a624b75-29c3-4ad3-9722-432c7ac7fb9a">
-View the Coffees available for purchase. 
+
 
 <img width="1255" alt="Screen Shot 2024-02-25 at 6 53 56 PM" src="https://github.com/zyousafzai21/1951CoffeeCollective/assets/101530128/4c9ce244-8712-40c3-8f61-c90ba1cb2841">
 Instead of a one-time purchase, have the opportunity to sign up for a continous Subscription. 
